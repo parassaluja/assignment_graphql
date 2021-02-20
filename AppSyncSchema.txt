@@ -1,0 +1,25 @@
+type Orders {
+    orderid: Int
+    userid: String
+    orderamount: Int
+    orderdate: String
+}
+
+type Query {
+    allusers: [User]
+    getUsers(userid: Int): User
+    getOrders(userid: Int): [Orders]
+}
+
+type User {
+    userid: Int
+    name: String
+    age: Int
+    email: String
+    orders: [Orders]
+  hometown(x : Int) : String
+}
+
+schema {
+    query: Query
+}

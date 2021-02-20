@@ -16,4 +16,3 @@ class Conf():
             return json_param
         except Exception as e:
             print("*********** Exception in parameters file ********", e)
-

@@ -1,0 +1,20 @@
+##############Get Users only ######################
+
+##############Get Users and orders ######################
+query myquery {
+  getUsers(userid: 1) {
+    userid
+    name
+    age
+    email
+    orders {
+      orderid
+      userid
+      orderamount
+      orderdate
+      payments{
+        paymentid
+      }
+    }
+  }
+}

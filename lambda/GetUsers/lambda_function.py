@@ -14,9 +14,9 @@ def lambda_handler(event, context):
     param = conf.get_param()
     db_host = param["db_hostname"]
     db_port = 5432
-    db_name = "assignmentdb"
-    db_user = "postgres"
-    db_pass = "paras123"
+    db_name = param["db_name"]
+    db_user = param["db_user"]
+    db_pass = param["db_pass"]
     db_table = "users"
     user_id = event['arguments']['userid']
     query = f"select * from users where userid ={user_id}"
@@ -25,8 +25,11 @@ def lambda_handler(event, context):
     conn = make_conn(db_name, db_user, db_host, db_pass)
     users = fetch_data(conn, query)
     print("**** Users data is :", users)
-
-    return users
+    print("length is : ", len(users))
+    if len(users) == 1:
+        return users[0]
+    else:
+        return users
 
     # return {
     #     "userid": result['userid'],
