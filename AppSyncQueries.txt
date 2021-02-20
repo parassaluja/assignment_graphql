@@ -1,4 +1,21 @@
 ##############Get Users only ######################
+query MyQuery {
+  allusers {
+    userid
+    age
+    email
+    name
+  }
+}
+##############Get Orders only ######################
+query MyQuery {
+  allOrders {
+    orderamount
+    orderdate
+    orderid
+    userid
+  }
+}
 
 ##############Get Users and orders ######################
 query myquery {
@@ -18,3 +35,71 @@ query myquery {
     }
   }
 }
+
+################## Create User ###############
+
+mutation createuserdata($createuserinput: CreateUserInput!) {
+  createUser(input: $createuserinput) {
+    userid
+    name
+    age
+    email
+  }
+}
+
+{
+    "createuserinput": {
+      "userid": 3,
+      "name": "Johnson",
+      "age": 20,
+      "email": "Johnson@hotmail.com"
+    }
+  }
+
+#################### Create Order ##############
+mutation createorderdata($createorderinput: CreateOrderInput!) {
+  createOrder(input: $createorderinput) {
+    orderid
+    userid
+    orderamount
+    orderdate
+  }
+}
+
+{
+    "createorderinput": {
+      "orderid": 4,
+      "userid": 2,
+      "orderamount": 400,
+      "orderdate": "2021-01-01"
+    }
+  }
+################# Delete User ################
+mutation deleteuserdata($deleteuser: DeleteUserInput!) {
+  deleteUser(input: $deleteuser) {
+    userid
+  }
+}
+{
+    "deleteuser": {
+      "userid": 3
+    }
+  }
+################# Update User ################
+mutation updateuserdata($updateuser: UpdateUserInput!) {
+  updateUser(input: $updateuser) {
+    userid
+    name
+    age
+    email
+  }
+}
+{
+    "updateuser": {
+      "userid": 2,
+      "name" : "Carl Max",
+      "age" : 48,
+      "email" : "Carlmax@gmail.com"
+    }
+  }
+####################################

@@ -1,25 +1,66 @@
+input CreateOrderInput {
+	orderid: Int
+	userid: Int
+	orderamount: Int
+	orderdate: String
+}
+
+input CreateUserInput {
+	userid: Int
+	name: String
+	age: Int
+	email: String
+}
+
+input DeleteUserInput {
+	userid: Int!
+}
+
+type Mutation {
+	createUser(input: CreateUserInput!): User
+	createOrder(input: CreateOrderInput!): Orders
+	deleteUser(input: DeleteUserInput!): User
+	updateUser(input: UpdateUserInput!): User
+}
+
 type Orders {
-    orderid: Int
-    userid: String
-    orderamount: Int
-    orderdate: String
+	orderid: Int
+	userid: String
+	orderamount: Int
+	orderdate: String
+	payments: [Payments]
+}
+
+type Payments {
+	paymentid: Int
+	orderid: Int
+	status: String
+	paymentdate: String
 }
 
 type Query {
-    allusers: [User]
-    getUsers(userid: Int): User
-    getOrders(userid: Int): [Orders]
+	allusers: [User]
+	allOrders: [Orders]
+	getUserandOrders(userid: Int): User
+	getOrders(userid: Int): [Orders]
+}
+
+input UpdateUserInput {
+	userid: Int
+	name: String
+	age: Int
+	email: String
 }
 
 type User {
-    userid: Int
-    name: String
-    age: Int
-    email: String
-    orders: [Orders]
-  hometown(x : Int) : String
+	userid: Int
+	name: String
+	age: Int
+	email: String
+	orders: [Orders]
 }
 
 schema {
-    query: Query
+	query: Query
+	mutation: Mutation
 }

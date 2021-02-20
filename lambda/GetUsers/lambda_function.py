@@ -18,8 +18,12 @@ def lambda_handler(event, context):
     db_user = param["db_user"]
     db_pass = param["db_pass"]
     db_table = "users"
-    user_id = event['arguments']['userid']
-    query = f"select * from users where userid ={user_id}"
+    args = event['arguments']
+    if args.get('userid'):
+        query = f"select * from users where userid ={args.get('userid')}"
+    else:
+        query = f"select * from users"
+
     print("**** query is :", query)
 
     conn = make_conn(db_name, db_user, db_host, db_pass)
