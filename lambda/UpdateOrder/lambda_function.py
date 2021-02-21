@@ -12,18 +12,18 @@ def lambda_handler(event, context):
     db_name = param["db_name"]
     db_user = param["db_user"]
     db_pass = param["db_pass"]
-    db_table = "users"
+    db_table = "orders"
 
     args = event['arguments']['input']
-    query = f"update {db_table} set name = '{args.get('name')}',age = {args.get('age')}, email = '{args.get('email')}' where userid = {args.get('userid')}"
-    queryget = f"select * from {db_table} where userid = {args.get('userid')}"
+    query = f"update {db_table} set userid = {args.get('userid')}, orderamount = {args.get('orderamount')}, orderdate = '{args.get('orderdate')}' where orderid = {args.get('orderid')}"
+    queryget = f"select * from {db_table} where orderid = {args.get('orderid')}"
 
     print("**** query is :", query)
 
     conn = make_conn(db_name, db_user, db_host, db_pass)
-    user_data = update_data(conn, query, queryget)
+    order_data = update_data(conn, query, queryget)
 
-    return user_data
+    return order_data
 
 
 def make_conn(db_name, db_user, db_host, db_pass):
@@ -43,13 +43,10 @@ def update_data(conn, query, queryget):
     for row in cursor:
         print(row)
         table_data = row
-        data_dict = {'userid': table_data[0], 'name': table_data[1], 'age': table_data[2],
-                     'email': str(table_data[3])}
+        data_dict = {'orderid': table_data[0], 'userid': table_data[1], 'orderamount': table_data[2],
+                     'orderdate': str(table_data[3])}
     conn.commit()
     print("**** Data updated successfully ***** ")
     return data_dict
-
-
-
 
 

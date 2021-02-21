@@ -102,4 +102,21 @@ mutation updateuserdata($updateuser: UpdateUserInput!) {
       "email" : "Carlmax@gmail.com"
     }
   }
-####################################
+################### Update Order#################
+
+mutation updateorderdata($updateorder: UpdateOrderInput!) {
+  updateOrder(input: $updateorder) {
+    orderid
+    userid
+    orderamount
+    orderdate
+  }
+}
+{
+    "updateorder": {
+      "orderid": 4,
+      "userid": 2,
+      "orderamount": 400,
+      "orderdate": "2021-01-01"
+    }
+  }
