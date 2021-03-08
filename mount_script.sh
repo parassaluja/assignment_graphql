@@ -1,5 +1,5 @@
 wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
-sudo su azureuser dpkg -i /home/azureuser/packages-microsoft-prod.deb
+sudo dpkg -i /home/azureuser/packages-microsoft-prod.deb
 sudo apt-get update
 sudo apt-get install blobfuse fuse
 mkdir -p /home/azureuser/blobcache
